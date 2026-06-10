@@ -3,7 +3,7 @@ Cybersecurity portfolio showcasing VAPT assessments, TryHackMe labs, security re
 # About Me
 
 Hi, I'm Aniket Singh, a Cybersecurity Enthusiast with hands-on experience in Vulnerability Assessment and Penetration Testing (VAPT), Web Application Security, Network Security, and Security Analysis.
-
+https://tryhackme.com/p/Anik8
 # Highlights
 CEH v13 Certified (EC-Council)
 CNSP Certified (The SecOps Group)
