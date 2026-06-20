@@ -82,7 +82,7 @@ Before executing the file, we started a Netcat listener to receive the connectio
 
 ![](ROOTME9.png)
 
-![](ROOTME10.png)
+![](ROOTME10.png)(images/ROOTME10.png)
 
 ## Start Netcat Listener
 ```
