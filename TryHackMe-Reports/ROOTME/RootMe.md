@@ -25,7 +25,7 @@ nmap -sS -A <target-IP>```
 ![](ROOTME1.png)
 
 ### HTTP
-![ROOTME2](images/ROOTME10.png)
+![ROOTME2](images/ROOTME2.png)
 
 ## Observation
 The presence of a web server indicates a potential attack surface for web-based exploitation.
