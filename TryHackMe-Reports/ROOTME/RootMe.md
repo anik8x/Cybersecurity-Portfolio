@@ -25,7 +25,7 @@ nmap -sS -A <target-IP>```
 ![](ROOTME1.png)
 
 ### HTTP
-![](ROOTME2.PNG)
+![](ROOTME2.png)
 
 ## Observation
 The presence of a web server indicates a potential attack surface for web-based exploitation.
@@ -40,10 +40,10 @@ gobuster dir -u <target-IP> -w /usr/share/wordlists/dirbuster/directory-list-2.3
 ## Discovered 
 - `/uploads`
 - `/panels`
-![](ROOTME3.PNG)
+![](ROOTME3.png)
 
 ## /panel 
-![](ROOTME4.PNG)
+![](ROOTME4.png)
 
 The `/panel/` directory allowed file uploads.
 
@@ -53,21 +53,21 @@ The `/panel/` directory allowed file uploads.
 1. **To bypass this:**
 	1. we used the default PHP reverse shell located at `/usr/share/webshells/php` in Kali Linux.
 	2.We copied the file to another directory to avoid modifying the original, and then edited the copied file using nano.
-![](ROOTME5.PNG)
+![](ROOTME5.png)
 
 ## Edit file using nano
 1. Change IP - To your IP
 2. Change Port - Any Listening Port.
 3. Save the file .
 
-![](ROOTME6.PNG)
+![](ROOTME6.png)
 - **Configured attacker IP and port inside the file.**
 
 ## Upload the file
 
-![](ROOTME7.PNG)
+![](ROOTME7.png)
 
-![](ROOTME8.PNG)
+![](ROOTME8.png)
 
 We received an error because the application did not allow us to upload a `.php` file.  
 To bypass this restriction, we tried different PHP extensions such as `.php3`, `.php4`, and `.php5`.  
@@ -80,9 +80,9 @@ Before executing the file, we started a Netcat listener to receive the connectio
 >`.php3`, `.php4`, `.php5`, `.php7`, `.phtml`, `.phar`, and `.php-s`.
 >These extensions may still be interpreted and executed by the web server if PHP handling is enabled, allowing successful code execution despite basic extension filtering.
 
-![](ROOTME9.PNG)
+![](ROOTME9.png)
 
-![](ROOTME10.PNG)
+![](ROOTME10.png)
 
 ## Start Netcat Listener
 ```
@@ -90,33 +90,33 @@ nc -nvlp 5253
 ```
 
 ## Execute the file
-![](ROOTME12.PNG)
+![](ROOTME12.png)
 
 ## Successfully gained initial access as **www-data** user.
 - www-data is by default user of apache2 service.
-![](ROOTME11.PNG)
+![](ROOTME11.png)
 
 ---
 # 6. User Flag 
- ![](ROOTME13.PNG)
+ ![](ROOTME13.png)
 After getting the shell, we could not find the user flag manually, so we used `find / -type f -name user.txt 2>/dev/null` to locate it, which provided the file path.
 
- ![](ROOTME14.PNG)
+ ![](ROOTME14.png)
 **User flag captured successfully**
 
 ---
 # 7. Stabilizing the Shell
 
-![](ROOTME15.PNG)
+![](ROOTME15.png)
 
-![](ROOTME16.PNG)
+![](ROOTME16.png)
 
 ```code
 python -c 'import pty; pty.spawn("/bin/sh")'
 ```
 - Improved shell interaction. This is called **Shell Spawning**. 
 
-![](ROOTME17.PNG)
+![](ROOTME17.png)
 
 
 ---
@@ -126,7 +126,7 @@ python -c 'import pty; pty.spawn("/bin/sh")'
 
 `find / -perm -u=s -type f 2>/dev/null`
 
-![](ROOTME18.PNG)
+![](ROOTME18.png)
 
 ### Discovered unusual SUID binary:
 
@@ -144,7 +144,7 @@ Since python had SUID bit set, it could execute commands as root.
 
 `python -c 'import os; os.setuid(0); os.system("/bin/bash")'`
 
-![](ROOTME19.PNG)
+![](ROOTME19.png)
 
 **BUT WE USED COMMAND WITH PATH**:
 
@@ -166,7 +166,7 @@ find / -type f -name root.txt 2>/dev/null
 cat /root/root.txt
 ```
 
-![](ROOTME20.PNG)
+![](ROOTME20.png)
 **Root flag captured successfully.**
 
 # 10. Vulnerability Analysis
